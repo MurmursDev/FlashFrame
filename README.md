@@ -1,6 +1,6 @@
 # FlashFrame
 
-FlashFrame is a scaffold creating an AWS based single web app.
+FlashFrame is a scaffold creating an AWS based single page web app.
 
 # Stack
 
