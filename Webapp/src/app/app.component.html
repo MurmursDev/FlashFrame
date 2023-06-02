@@ -1,0 +1,11 @@
+<mat-toolbar class="topToolbarNav" color="primary">
+  <div class="title">{{title}}</div>
+  <span class="flex-auto"></span>
+  <button mat-icon-button *ngIf="isLoggedIn" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <a  mat-icon-button *ngIf="!isLoggedIn" href="{{loginUrl}}">
+    <mat-icon>login</mat-icon>
+  </a>
+</mat-toolbar>
+<router-outlet (activate)="refreshLoginStatus()"></router-outlet>
