@@ -29,12 +29,12 @@ class RestApiStack(
         val lambdaAPIGatewayPermission: Permission = Permission.builder()
             .principal(ServicePrincipal("apigateway.amazonaws.com"))
             .build()
-        restApiLambda.addPermission("API GW Permission", lambdaAPIGatewayPermission);
+        restApiLambda.addPermission("API GW Permission", lambdaAPIGatewayPermission)
 
         val openAPIAsset: Asset = Asset.Builder.create(this, "OpenApiAsset")
             .path(Config.API_DEFINITION_PATH).build()
 
-        val transformMap = mapOf("Location" to openAPIAsset.s3ObjectUrl);
+        val transformMap = mapOf("Location" to openAPIAsset.s3ObjectUrl)
         // Include the OpenAPI template as part of the API Definition supplied to API Gateway
         val data: IResolvable = Fn.transform("AWS::Include", transformMap)
 
@@ -54,10 +54,9 @@ class RestApiStack(
             .restApiName("${Config.APP_NAME}RestAPI")
             .deployOptions(
                 StageOptions.builder()
+                    .throttlingRateLimit(100)
+                    .throttlingBurstLimit(100)
                     .stageName("dev")
-                    .variables(
-                        mapOf("corsUrl" to "*")
-                    )
                     .dataTraceEnabled(true)
                     .loggingLevel(MethodLoggingLevel.INFO)
                     .tracingEnabled(true)
