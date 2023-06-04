@@ -1,9 +1,6 @@
-import org.gradle.initialization.Environment
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     application
-    kotlin("jvm") version  "1.8.0"
+    kotlin("jvm") version "1.8.0"
 }
 
 val cdkVersion = "2.79.1"
@@ -25,17 +22,11 @@ dependencies {
     implementation("com.google.guava:guava:31.1-jre")
 }
 
-tasks.register("synth", Exec::class){
-    commandLine("cdk","synth")
+tasks.register("synth", Exec::class) {
+    commandLine("cdk", "synth")
 }
 
-tasks.register("bootstrap", Exec::class){
+tasks.build {
     dependsOn("synth")
-    commandLine("cdk","bootstrap")
-}
-
-tasks.register("deployAll", Exec::class){
-    dependsOn("synth")
-    commandLine("cdk","deploy","--all")
 }
 

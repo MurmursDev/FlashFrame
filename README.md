@@ -74,22 +74,30 @@ There are only two manual operations now, modifying name servers to Route53 and 
 
 ## Checkout
 
+## Setup Environment Variable
+You need to set up `AWS_ACCOUNT_ID` and `AWS_REGION` for building CDK
+
 ## Build
 run `gradle build`
 
 ## Bootstrap
 
-run `gradle bootstrap`
+run
+
+`cd CDK`
+
+`cdk bootstrap`
 
 ## Deploy Route53
 
-run `gradle deploy Route53`
+run `cdk deploy ${AppName}-Route53Stack` 
 
 ## Change Name Server of Your Domain to Route53
+Login to your domain provider and change the name service to Route53 
 
 ## Deploy all
 
-run `gradle deploy`
+run `cdk deploy --all`
 
 ## TODO
 - [ ] Add throttling to prevent accident cost in AWS
